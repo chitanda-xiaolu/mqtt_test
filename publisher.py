@@ -44,11 +44,11 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_publish = on_publish
 
-client.connect('iot.eclipse.org', 1883, 60)
+client.connect('127.0.0.1', 1883, 60)
 
 while True:
     try:
-        data = random.randint(24,28)
+        data = random.randint(24, 28)
         client.publish('temperature', str(data) + '℃')
         time.sleep(5)
     except KeyboardInterrupt:
