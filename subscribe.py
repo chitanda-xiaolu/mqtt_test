@@ -8,7 +8,7 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    print(msg.topic + " " + str(msg.payload))
+    print(msg.topic + "： " + str(msg.payload) + str(type(msg.payload)))
 
 
 client = mqtt.Client()
