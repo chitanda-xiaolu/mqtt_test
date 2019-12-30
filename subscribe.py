@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code " + str(rc))
     # 连接时订阅test主题
-    client.subscribe("test")
+    client.subscribe("statu")
 
 
 def on_message(client, userdata, msg):
