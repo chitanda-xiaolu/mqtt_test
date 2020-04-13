@@ -29,31 +29,50 @@
 #         client.disconnect()
 #         sys.exit(0)
 
+# import paho.mqtt.client as mqtt
+# import time
+# import sys
+# import random
+#
+# def on_connect(client, userdata, flags, rc):
+#     print('Connected with result code ' + str(rc))
+#
+# def on_publish(client):
+#     print('temperature')
+#
+# client = mqtt.Client()
+# client.on_connect = on_connect
+# client.on_publish = on_publish
+#
+# client.connect('127.0.0.1', 1883, 60)
+#
+# while True:
+#     try:
+#         data = random.randint(24, 28)
+#         client.publish('temperature', str(data) + '℃')
+#         time.sleep(5)
+#     except KeyboardInterrupt:
+#         print('EXit')
+#         client.disconnect()
+#         sys.exit(0)
+
 import paho.mqtt.client as mqtt
-import time
-import sys
-import random
+
 
 def on_connect(client, userdata, flags, rc):
-    print('Connected with result code ' + str(rc))
+    print("Connected with result code " + str(rc))
 
-def on_publish(client):
-    print('temperature')
 
+def on_message(client, userdata, msg):
+    print(msg.topic + " " + str(msg.payload))
+
+# data = {'statu': False}
+payload = 'status1false'
 client = mqtt.Client()
 client.on_connect = on_connect
-client.on_publish = on_publish
-
-client.connect('127.0.0.1', 1883, 60)
-
-while True:
-    try:
-        data = random.randint(24, 28)
-        client.publish('temperature', str(data) + '℃')
-        time.sleep(5)
-    except KeyboardInterrupt:
-        print('EXit')
-        client.disconnect()
-        sys.exit(0)
+client.on_message = on_message
+client.connect("114.55.33.165", 1883, 60)
+# 发布 test主题
+client.publish("switch", payload)
 
 
