@@ -1,4 +1,5 @@
 import paho.mqtt.client as mqtt
+import json
 
 
 def on_connect(client, userdata, flags, rc):
@@ -9,10 +10,14 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     print(msg.topic + "： " + str(msg.payload) + str(type(msg.payload)))
+    print(eval(str(msg.payload)[1::]))
+    client.disconnect()
 
 
 client = mqtt.Client()
-client.on_connect = on_connect
+client.connect("114.55.33.165", 1883, 60)
+client.subscribe("statu")
+# client.on_connect = on_connect
 client.on_message = on_message
-client.connect("127.0.0.1", 1883, 60)
+# client.connect("127.0.0.1", 1883, 60)
 client.loop_forever()

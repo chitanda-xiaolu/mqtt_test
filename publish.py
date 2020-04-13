@@ -13,6 +13,6 @@ payload = 'socket1true'
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
-client.connect("127.0.0.1", 1883, 60)
+client.connect("114.55.33.165", 1883, 60)
 # 发布 test主题
-client.publish("test", payload)
+client.publish("switch", payload)
